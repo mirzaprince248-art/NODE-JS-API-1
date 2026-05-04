@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotel Management System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Hotel Management System</h1>
+    <p>Normalized API + backend + frontend in one working system.</p>
+  </header>
+
+  <main>
+    <section class="dashboard">
+      <div class="card">
+        <h2>Rooms</h2>
+        <div id="rooms-container"></div>
+      </div>
+      <div class="card">
+        <h2>Bookings</h2>
+        <div id="bookings-container"></div>
+      </div>
+      <div class="card">
+        <h2>Customers</h2>
+        <div id="customers-container"></div>
+      </div>
+      <div class="card">
+        <h2>Payments</h2>
+        <div id="payments-container"></div>
+      </div>
+    </section>
+
+    <section class="forms">
+      <div class="card form-card">
+        <h2>Add Customer</h2>
+        <form id="customer-form">
+          <label>First Name<input name="first_name" required /></label>
+          <label>Last Name<input name="last_name" required /></label>
+          <label>Email<input name="email" type="email" /></label>
+          <label>Phone<input name="phone" /></label>
+          <button type="submit">Create Customer</button>
+        </form>
+      </div>
+
+      <div class="card form-card">
+        <h2>New Booking</h2>
+        <form id="booking-form">
+          <label>Customer ID<input name="customer_id" type="number" required /></label>
+          <label>Room ID<input name="room_id" type="number" required /></label>
+          <label>Check In<input name="check_in_date" type="date" required /></label>
+          <label>Check Out<input name="check_out_date" type="date" required /></label>
+          <label>Notes<input name="notes" /></label>
+          <button type="submit">Create Booking</button>
+        </form>
+      </div>
+
+      <div class="card form-card">
+        <h2>Record Payment</h2>
+        <form id="payment-form">
+          <label>Booking ID<input name="booking_id" type="number" required /></label>
+          <label>Amount<input name="amount" type="number" step="0.01" required /></label>
+          <label>Paid On<input name="paid_on" type="date" required /></label>
+          <label>Method<input name="payment_method" required /></label>
+          <button type="submit">Save Payment</button>
+        </form>
+      </div>
+
+      <div class="card form-card">
+        <h2>Update Booking Status</h2>
+        <form id="status-form">
+          <label>Booking ID<input name="booking_id" type="number" required /></label>
+          <label>Status
+            <select name="status" required>
+              <option value="booked">Booked</option>
+              <option value="checked_out">Checked Out</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </label>
+          <button type="submit">Update Status</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Backend served from <a href="/api/status">/api/status</a></p>
+  </footer>
+  <script src="app.js"></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
